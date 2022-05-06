@@ -1,23 +1,11 @@
 // Edit this array of apps
 var apps = [
     {
-        name: "Hello App",
-        path: "./hello/",
-        image: "https://hub.analythium.io/img/shiny/shiny-hello.png",
-        description: "A purple colored histogram from the Normal distribution"
-    },
-    {
         name: "Pink App",
         path: "./pink/",
-        image: "https://hub.analythium.io/assets/web/pink-hist.png",
-        description: "A pink colored histogram from the Uniform distribution"
+        image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.logolynx.com%2Fimages%2Flogolynx%2Feb%2Feb16b50102a0e2117f4c24c317e1cb60.png&f=1&nofb=1",
+        description: "My own Strava"
     },
-    {
-        name: "COVID-19 App",
-        path: "./covidapp/",
-        image: "https://hub.analythium.io/assets/web/covid-shiny.png",
-        description: "COVID-19 daily case counts and forecast by country"
-    }
 ]
 
 var app = new Vue({
