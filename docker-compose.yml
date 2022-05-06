@@ -1,21 +1,11 @@
 version: '3.7'
 
 services:
-  hello:
-    image: registry.gitlab.com/analythium/shinyproxy-hello/hello:latest
-    restart: unless-stopped
-    ports:
-      - '9000:3838'
-  pink:
-    build: ./pink
+  strava:
+    build: ./strava
     restart: always
     expose:
-      - "3838"
-  covidapp:
-    image: analythium/covidapp-shiny:minimal
-    restart: always
-    expose:
-      - "3838"
+      - '3838'
   caddy:
     image: caddy:2.3.0-alpine
     restart: always
@@ -29,9 +19,7 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
-      - hello
-      - pink
-      - covidapp
+      - strava
     environment:
       - HOST="localhost"
 volumes:

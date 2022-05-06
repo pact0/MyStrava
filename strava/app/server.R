@@ -21,11 +21,11 @@ library(trackeR)
 
 server <- function(input, output) {
 
-#C <- reactive ({ as.numeric(input$C) })  
+#C <- reactive ({ as.numeric(input$C) })
 
 #constant
 coef <- 3.6
-  
+
 #output$verb <- renderPrint({ mydata() })
 
 mydata<- reactive({
@@ -37,9 +37,9 @@ ext<-strsplit(x, split="\\.")[[1]][length(strsplit(x, split="\\.")[[1]])]
 if (tolower(ext)=="fit"){
 data_f <- readFitFile(input$file$datapath)
 
-e <- records(data_f) %>% 
-  bind_rows() %>% 
-  arrange(timestamp) 
+e <- records(data_f) %>%
+  bind_rows() %>%
+  arrange(timestamp)
 
 e_df<-as.data.frame(e)
 } # od fit
@@ -47,9 +47,9 @@ e_df<-as.data.frame(e)
 if (tolower(ext)=="fit"){
 data_f <- readFitFile(input$file$datapath)
 
-e <- records(data_f) %>% 
-  bind_rows() %>% 
-  arrange(timestamp) 
+e <- records(data_f) %>%
+  bind_rows() %>%
+  arrange(timestamp)
 
 e_df<-as.data.frame(e)
 } # od fit
@@ -102,14 +102,14 @@ cols<-colnames(e_df)
 lo<-str_detect(colnames(e_df), "long")
 la<-str_detect(colnames(e_df), "lat")
 
-coords <- e_df %>% 
+coords <- e_df %>%
   select(cols[lo], cols[la])
 
-m <- coords %>% 
+m <- coords %>%
   as.matrix() %>%
   leaflet(  ) %>%
   addTiles() %>%
-  addPolylines( )    
+  addPolylines( )
 m
 
 

@@ -7,9 +7,9 @@ library(trackeR)
 
 #data_f <- readFitFile("Running_2022-02-03T11_50_54.fit")
 
-#e <- records(data_f) %>% 
-#  bind_rows() %>% 
-#  arrange(timestamp) 
+#e <- records(data_f) %>%
+#  bind_rows() %>%
+#  arrange(timestamp)
 
 e_df<-df[colSums(!is.na(df)) > 0.9]
 
@@ -23,15 +23,15 @@ lo<-str_detect(colnames(e_df), "long")
 la<-str_detect(colnames(e_df), "lat")
 ti<-str_detect(colnames(e_df), "time")
 di<-str_detect(colnames(e_df), "dist")
-coords <- e_df %>% 
+coords <- e_df %>%
   select(cols[lo], cols[la])
 
 
-m <- coords %>% 
+m <- coords %>%
   as.matrix() %>%
   leaflet(  ) %>%
   addTiles() %>%
-  addPolylines( )    
+  addPolylines( )
 m
 
 ti<-str_detect(colnames(e_df), "time")

@@ -1,11 +1,11 @@
 
 #credentials <- data.frame(
 #  user = c("ankieta"), # mandatory
-#  password = c("ankieta2021"), # mandatory 
+#  password = c("ankieta2021"), # mandatory
 #  admin = c(TRUE),
-#  comment = "Simple and secure authentification mechanism 
+#  comment = "Simple and secure authentification mechanism
 #  for single ‘Shiny’ applications.",
-#  stringsAsFactors = FALSE 
+#  stringsAsFactors = FALSE
 #)
 
 library(shinymanager)
