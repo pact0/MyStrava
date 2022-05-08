@@ -9,11 +9,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libssh2-1-dev \
     libgdal-dev \
     build-essential \
+    r-cran-raster \
     make \
     cmake \
     && rm -rf /var/lib/apt/lists/*
 
 RUN install.r remotes
+
+RUN sudo su - -c "R -e \"install.packages('https://cran.r-project.org/src/contrib/Archive/raster/raster_2.5-8.tar.gz', repos = NULL, type='source')\""
 
 RUN sudo su - -c "R -e \"remotes::install_github('grimbough/FITfileR')\""
 RUN sudo su - -c "R -e \"remotes::install_github('rspatial/terra')\""

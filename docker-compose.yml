@@ -21,7 +21,7 @@ services:
     depends_on:
       - strava
     environment:
-      - HOST="localhost"
+      - HOST="20.25.61.17"
 volumes:
   caddy_data:
   caddy_config:
