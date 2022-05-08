@@ -1,4 +1,4 @@
-HOST <- "159.203.22.73" # your IP or HOST name here
+HOST <- "20.25.61.17"
 
 system2("scp",
   c(
@@ -24,9 +24,3 @@ uri <- sapply(x, function(z) z$request$uri)
 s <- endsWith(req_uri, "/") & !endsWith(req_uri, "/websocket/")
 
 table(req_uri[s], as.Date(ts[s]))
-
-#              2021-06-15 2021-06-16
-#  /                    8          2
-#  /covidapp/           3          0
-#  /hello/              5          0
-#  /pink/               5          1
