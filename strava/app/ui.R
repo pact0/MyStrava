@@ -1,13 +1,3 @@
-
-#credentials <- data.frame(
-#  user = c("ankieta"), # mandatory
-#  password = c("ankieta2021"), # mandatory
-#  admin = c(TRUE),
-#  comment = "Simple and secure authentification mechanism
-#  for single ‘Shiny’ applications.",
-#  stringsAsFactors = FALSE
-#)
-
 library(shinymanager)
 library(shiny)
 library(leaflet)
@@ -38,8 +28,8 @@ ui <- fluidPage(
 	hr(),
 	plotOutput("Box_plot",width = "100%", height = "800px"),
 	hr(),
-#	verbatimTextOutput("verb"),
-      #tableOutput("Fit_table")
+	verbatimTextOutput("verb"),
+      tableOutput("Fit_table")
 
     )
   )
@@ -47,8 +37,37 @@ ui <- fluidPage(
 
 
 #secure ui
-#ui <- secure_app(ui)
+
+# create_db(
+#  credentials_data = credentials,
+#  sqlite_path = "./database.sqlite", # will be created
+#)
 
 
 
+#-------------
+
+ui <- secure_app(ui, enable_admin=TRUE)
+
+#-------------
+
+
+
+server <- function(input, output, session) {
+  
+  # call the server part
+  # check_credentials returns a function to authenticate users
+  res_auth <- secure_server(
+    check_credentials = check_credentials('./database.sqlite')
+  )
+  
+  output$auth_output <- renderPrint({
+    reactiveValuesToList(res_auth)
+  })
+  
+  # your classic server logic
+  
+}
+
+shinyApp(ui, server)
 
