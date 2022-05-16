@@ -1,4 +1,4 @@
-proxy {$HOST}:80 {
+proxy {$HOST}:443 {
 
     tls {
 	      dns duckdns 4e003dea-ac1c-458a-ad77-7f2c58ed46b5
