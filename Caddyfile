@@ -1,8 +1,14 @@
 proxy {$HOST}:80 {
+
+    tls {
+	      dns duckdns 4e003dea-ac1c-458a-ad77-7f2c58ed46b5
+    }
+
     root * /srv
     handle_path /strava/* {
         reverse_proxy strava:3838
     }
+
     file_server
     handle_errors {
         @404 {
@@ -11,6 +17,7 @@ proxy {$HOST}:80 {
         rewrite @404 /404.html
         file_server
     }
+
     log {
         output file /var/log/caddy/access.log
     }

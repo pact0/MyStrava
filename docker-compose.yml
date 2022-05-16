@@ -1,17 +1,17 @@
-version: '3.7'
+version: "3.7"
 
 services:
   strava:
     build: ./strava
     restart: always
     expose:
-      - '3838'
+      - "3838"
   caddy:
     image: caddy:2.3.0-alpine
     restart: always
     ports:
-      - '80:80'
-      - '443:443'
+      - "80:80"
+      - "443:443"
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile
       - $PWD/site:/srv
@@ -22,6 +22,17 @@ services:
       - strava
     environment:
       - HOST="20.25.61.17"
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    container_name: duckdns
+    environment:
+      - TZ=Europe/Warsaw
+      - SUBDOMAINS=strava-iad
+      - TOKEN=4e003dea-ac1c-458a-ad77-7f2c58ed46b5
+      - LOG_FILE=true
+    volumes:
+      - ./config:/config #optional
+    restart: unless-stopped
 volumes:
   caddy_data:
   caddy_config:
