@@ -11,13 +11,21 @@ library(trackeR)
 
 
 server <- function(input, output) {
+  
+  res_auth <- secure_server(
+    check_credentials = check_credentials('./database.sqlite')
+  )
+  output$auth_output <- renderPrint({
+    reactiveValuesToList(res_auth)
+  })
+  
 
-C <- reactive ({ as.numeric(input$C) })  
+#C <- reactive ({ as.numeric(input$C) })  
 
 #constant
 coef <- 3.6
   
-output$verb <- renderPrint({ mydata() })
+#output$verb <- renderPrint({ mydata() })
 
 mydata<- reactive({
 
@@ -153,9 +161,9 @@ plot(e_df[ti],e_df[,sel_v[len]],xlab="Time",ylab=cols[sel_v[len]],t="l",lwd=2,ce
 
 })
 
-output$verb <- renderPrint({ summary(mydata()) })
+#output$verb <- renderPrint({ summary(mydata()) })
 
-output$Fit_table <- renderTable({mydata()},digits = 4)
+#output$Fit_table <- renderTable({mydata()},digits = 4)
 
 
 output$Box_plot <- renderPlot({
@@ -217,8 +225,6 @@ output$downloadData <- downloadHandler(
 
 
 }
-
-
 
 
 
