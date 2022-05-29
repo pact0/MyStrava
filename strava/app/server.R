@@ -8,6 +8,29 @@ library(tools)
 library(stringr)
 library(openxlsx)
 library(trackeR)
+library(RSQLite)
+
+
+
+saveData <- function(value, user) {
+  # Connect to the database
+  db <- dbConnect(SQLite(), 'database.sqlite')
+  # Construct the update query by looping over the data fields
+  query <- sprintf(
+    "UPDATE credentials SET value = %s WHERE user = '%s'",
+    paste(value),
+    paste(user)
+  )
+  # Submit the update query and disconnect
+  dbGetQuery(db, query)
+  dbDisconnect(db)
+}
+
+
+
+
+
+
 
 
 server <- function(input, output) {
@@ -28,6 +51,7 @@ coef <- 3.6
 #output$verb <- renderPrint({ mydata() })
 
 mydata<- reactive({
+  
 
 x<-req(input$file)
 x<-x$name
@@ -131,6 +155,8 @@ speed<-rep(NA,len)
 speed[2:len]<-e_df[2:(len),ti]-e_df[1:(len-1),ti]
 speed[speed==0]<-NA
 speed[2:len]<-e_df[2:(len),di]-e_df[1:(len-1),di]
+
+
 e_df$speed<-speed
 cols<-colnames(e_df)
 lo<-str_detect(colnames(e_df), "long")
@@ -142,6 +168,7 @@ di<-str_detect(colnames(e_df), "dist")
 }
 
 
+saveData(runif(1, 5.0, 7.5), res_auth$user)
 
 if (input$kmh==TRUE)
 {
